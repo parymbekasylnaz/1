@@ -1,82 +1,73 @@
 package objects;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class FitnessApp {
 
-    private int id;
     private User user;
-    private WorkoutRoutine workoutRoutine;
-    private double totalCalories;
-    private double goalCalories;
-    private double subscriptionFee;
+    private List<WorkoutRoutine> routines;
 
-    public FitnessApp() {
-    }
-
-    public FitnessApp(int id, User user, WorkoutRoutine workoutRoutine,
-                      double totalCalories, double goalCalories, double subscriptionFee) {
-        this.id = id;
+    public FitnessApp(User user) {
         this.user = user;
-        this.workoutRoutine = workoutRoutine;
-        this.totalCalories = totalCalories;
-        this.goalCalories = goalCalories;
-        this.subscriptionFee = subscriptionFee;
+        this.routines = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
+    public void addRoutine(WorkoutRoutine routine) {
+        routines.add(routine);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public WorkoutRoutine findByName(String name) {
+        for (WorkoutRoutine r : routines) {
+            if (r.getName().equalsIgnoreCase(name)) return r;
+        }
+        return null;
     }
 
-    public User getUser() {
-        return user;
+    public List<WorkoutRoutine> getActiveRoutines() {
+        List<WorkoutRoutine> active = new ArrayList<>();
+        for (WorkoutRoutine r : routines) {
+            if (r.isActive()) active.add(r);
+        }
+        return active;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void sortByCalories() {
+        for (int i = 0; i < routines.size() - 1; i++) {
+            for (int j = 0; j < routines.size() - i - 1; j++) {
+                WorkoutRoutine r1 = routines.get(i);
+                WorkoutRoutine r2 = routines.get(j + 1);
+                if(r1.getCaloriesBurned() > r2.getCaloriesBurned()) {
+                    routines.set(i, r2);
+                    routines.set(j + 1, r1);
+                }
+
+            }
+        }
     }
 
-    public WorkoutRoutine getWorkoutRoutine() {
-        return workoutRoutine;
+    public void showInfo() {
+        System.out.println("FitnessApp info:");
+        System.out.println("User: " + user);
+        System.out.println("Workouts: " + routines);
     }
 
-    public void setWorkoutRoutine(WorkoutRoutine workoutRoutine) {
-        this.workoutRoutine = workoutRoutine;
-    }
-
-    public double getTotalCalories() {
-        return totalCalories;
-    }
-
-    public void setTotalCalories(double totalCalories) {
-        this.totalCalories = totalCalories;
-    }
-
-    public double getGoalCalories() {
-        return goalCalories;
-    }
-
-    public void setGoalCalories(double goalCalories) {
-        this.goalCalories = goalCalories;
-    }
-
-    public double getSubscriptionFee() {
-        return subscriptionFee;
-    }
-
-    public void setSubscriptionFee(double subscriptionFee) {
-        this.subscriptionFee = subscriptionFee;
-    }
-
+    @Override
     public String toString() {
-        return "FitnessApp{" +
-                "id=" + id +
-                ", user=" + user +
-                ", workoutRoutine=" + workoutRoutine +
-                ", totalCalories=" + totalCalories +
-                ", goalCalories=" + goalCalories +
-                ", subscriptionFee=" + subscriptionFee +
-                '}';
+        return "FitnessApp{user=" + user + " | routines=" + routines + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        FitnessApp app = (FitnessApp) o;
+        return Objects.equals(user, app.user) &&
+                Objects.equals(routines, app.routines);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, routines);
     }
 }

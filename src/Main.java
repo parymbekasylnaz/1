@@ -1,29 +1,22 @@
-import objects.FitnessApp;
-import objects.User;
-import objects.WorkoutRoutine;
+import objects.*;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        WorkoutRoutine routine = new WorkoutRoutine();
-        routine.setId(1);
-        routine.setType("Cardio");
-        routine.setName("Morning Workout");
-        routine.setCaloriesBurned(400);
-        routine.setDuration("45 minutes");
-        routine.setActive(false);
+        User user = new User(1, "Assylnaz", "Parymbek", "assylnaz@mail.com", "87763360848");
 
-        User user = new User();
-        user.setId(1);
-        user.setFullName("Assylnaz");
-        user.setEmail("assylnaz.parymbek@mail.ru");
-        user.setPhoneNumber("87763360848");
+        FitnessApp app = new FitnessApp(user);
 
-        FitnessApp app = new FitnessApp(1, user, routine, 2800, 3000, 1500);
+        WorkoutRoutine r1 = new WorkoutRoutine(1, "Morning Workout", "Cardio", 400, "45 minutes", true);
+        WorkoutRoutine r2 = new WorkoutRoutine(2, "Evening Workout", "Strength", 300, "30 minutes", false);
 
-        System.out.println(user.getFullName());
-        System.out.println(app.toString());
-        System.out.println(routine.getName());
-        System.out.println(routine.getType());
+        app.addRoutine(r1);
+        app.addRoutine(r2);
+
+        app.sortByCalories();
+        app.showInfo();
+
+        System.out.println("Active routines: " + app.getActiveRoutines());
+        System.out.println("Search 'Morning Workout': " + app.findByName("Morning Workout"));
     }
 }
