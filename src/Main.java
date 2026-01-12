@@ -1,6 +1,7 @@
 import objects.*;
 
 public class Main {
+
     public static void main(String[] args) {
 
         User user = new User(1, "Assylnaz", "Parymbek", "assylnaz@mail.com", "87763360848");
@@ -19,4 +20,5 @@ public class Main {
         System.out.println("Active routines: " + app.getActiveRoutines());
         System.out.println("Search 'Morning Workout': " + app.findByName("Morning Workout"));
     }
+
 }
