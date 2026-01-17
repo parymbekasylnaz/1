@@ -25,8 +25,8 @@ Fitness App is a Java application for managing fitness workouts. The program all
 
 1. Ensure you have Java installed (JDK 8 or higher)
 2. Open the project in IntelliJ IDEA
-3. Locate the Main.java file
-4. Right-click on Main.java and select Run 'Main.main()'
+3. Locate the kz.assylnaz.assignment.Main.java file
+4. Right-click on kz.assylnaz.assignment.Main.java and select Run 'kz.assylnaz.assignment.Main.main()'
 5. Program execution results will appear in the console
 
 
@@ -55,8 +55,8 @@ Fitness App is a Java application for managing fitness workouts. The program all
 ### Additional Features:
 
 **Method Overriding:**
-- toString() - returns string representation of objects
-- equals() - compares objects by content
+- toString() - returns string representation of kz.assylnaz.assignment.objects
+- equals() - compares kz.assylnaz.assignment.objects by content
 - hashCode() - generates hash code consistent with equals()
 
 **Data Organization:**
